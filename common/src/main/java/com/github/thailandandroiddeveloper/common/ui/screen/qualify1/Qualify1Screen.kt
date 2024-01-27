@@ -10,13 +10,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
@@ -26,6 +27,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -37,39 +39,42 @@ import com.github.thailandandroiddeveloper.common.ui.theme.AppTheme
 import com.github.thailandandroiddeveloper.common.ui.theme.LightColors.Primary
 
 @Composable
-fun Qualify1Screen(
-    modifier: Modifier = Modifier
-) {
+fun Qualify1Screen() {
     Scaffold(
-        modifier = modifier,
-        topBar = { TopAppBar() },
+        modifier = Modifier,
+        topBar = { TopBar() },
         containerColor = colorScheme.onPrimary
     ) {
-        Content(
+        MainContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
         )
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun TopAppBar() {
+private fun TopBar() {
     TopAppBar(
         title = {},
         navigationIcon = {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_qualify_1_menu),
-                contentDescription = "navigation icon"
-            )
+            IconButton(onClick = {}) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_qualify_1_menu),
+                    contentDescription = "navigation icon",
+                    modifier = Modifier.size(48.dp)
+                )
+            }
         },
         actions = {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_qualify_1_profile),
-                contentDescription = "actions"
-            )
+            IconButton(onClick = {}) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_qualify_1_profile),
+                    contentDescription = "actions",
+                    modifier = Modifier.size(48.dp)
+                )
+            }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             navigationIconContentColor = colorScheme.onPrimaryContainer,
@@ -80,14 +85,14 @@ private fun TopAppBar() {
 }
 
 @Composable
-private fun Content(modifier: Modifier = Modifier) {
+private fun MainContent(modifier: Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp)
             .padding(top = 16.dp, bottom = 48.dp)
     ) {
-        ProfileCard()
+        MainContentBox()
 
         Row(
             horizontalArrangement = Arrangement.spacedBy(43.dp),
@@ -102,15 +107,15 @@ private fun Content(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun ProfileCard() {
-    Card(modifier = Modifier) {
-        Box(
-            modifier = Modifier,
-            contentAlignment = Alignment.BottomStart
-        ) {
-            ProfileImage()
-            ProfileInfo()
-        }
+private fun MainContentBox() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(size = 16.dp)),
+        contentAlignment = Alignment.BottomStart
+    ) {
+        MainImage()
+        MainInfo()
     }
 }
 
@@ -153,17 +158,17 @@ private fun ButtonThumbUp() {
 }
 
 @Composable
-private fun ProfileImage() {
+private fun MainImage() {
     Image(
         painter = painterResource(id = R.drawable.img_qualify_1_profile),
-        contentDescription = "profile image",
+        contentDescription = "main image",
         contentScale = ContentScale.FillBounds,
         modifier = Modifier
     )
 }
 
 @Composable
-private fun ProfileInfo() {
+private fun MainInfo() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
